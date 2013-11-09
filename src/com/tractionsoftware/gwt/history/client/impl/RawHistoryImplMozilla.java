@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Based on code from GWT HistoryImpl, Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,12 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.user.client.impl;
+package com.tractionsoftware.gwt.history.client.impl;
 
 /**
  * History implementation for Mozilla-based browsers.
  */
-class HistoryImplMozilla extends HistoryImplTimer {
+class RawHistoryImplMozilla extends RawHistoryImplTimer {
 
   @Override
   protected String decodeFragment(String encodedFragment) {
@@ -47,7 +47,7 @@ class HistoryImplMozilla extends HistoryImplTimer {
 
       $wnd.location = s + '#';
     } else {
-      $wnd.location.hash = this.@com.google.gwt.user.client.impl.HistoryImpl::encodeFragment(Ljava/lang/String;)(historyToken);
+      $wnd.location.hash = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::encodeFragment(Ljava/lang/String;)(historyToken);
     }
   }-*/;
 }

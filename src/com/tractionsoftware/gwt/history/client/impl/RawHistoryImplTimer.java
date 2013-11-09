@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Based on code from GWT HistoryImpl, Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,13 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.user.client.impl;
+package com.tractionsoftware.gwt.history.client.impl;
 
 /**
  * Base class for history implementations that use a timer rather than the
  * onhashchange event.
  */
-class HistoryImplTimer extends HistoryImpl {
+class RawHistoryImplTimer extends RawHistoryImpl {
 
   @Override
   public native boolean init() /*-{
@@ -28,10 +28,10 @@ class HistoryImplTimer extends HistoryImpl {
     // Get the initial token from the url's hash component.
     var hash = $wnd.location.hash;
     if (hash.length > 0) {
-      token = this.@com.google.gwt.user.client.impl.HistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
+      token = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
     }
 
-    @com.google.gwt.user.client.impl.HistoryImpl::setToken(Ljava/lang/String;)(token);
+    @com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::setToken(Ljava/lang/String;)(token);
 
     // Create the timer that checks the browser's url hash every 1/4 s.
     var historyImpl = this;
@@ -39,10 +39,10 @@ class HistoryImplTimer extends HistoryImpl {
     var checkHistory = $entry(function() {
       var token = '', hash = $wnd.location.hash;
       if (hash.length > 0) {
-        token = historyImpl.@com.google.gwt.user.client.impl.HistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
+        token = historyImpl.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
       }
 
-      historyImpl.@com.google.gwt.user.client.impl.HistoryImpl::newItemOnEvent(Ljava/lang/String;)(token);
+      historyImpl.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::newItemOnEvent(Ljava/lang/String;)(token);
     });
 
     var checkHistoryCycle = function() {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Based on code from GWT HistoryImpl, Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.user.client.impl;
+package com.tractionsoftware.gwt.history.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
@@ -33,7 +33,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * determine when the URL hash identifier changes.
  * </p>
  */
-public class HistoryImpl implements HasValueChangeHandlers<String> {
+public class RawHistoryImpl implements HasValueChangeHandlers<String> {
 
   private static String token = "";
 
@@ -56,7 +56,7 @@ public class HistoryImpl implements HasValueChangeHandlers<String> {
   }
 
   protected static void setToken(String token) {
-    HistoryImpl.token = token;
+    RawHistoryImpl.token = token;
   }
 
   private JavaScriptObject oldHandler;
@@ -75,7 +75,7 @@ public class HistoryImpl implements HasValueChangeHandlers<String> {
   }
 
   public native void dispose() /*-{
-    $wnd.onhashchange = this.@com.google.gwt.user.client.impl.HistoryImpl::oldHandler;
+    $wnd.onhashchange = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::oldHandler;
   }-*/;
 
   public native String encodeFragment(String fragment) /*-{
@@ -104,23 +104,23 @@ public class HistoryImpl implements HasValueChangeHandlers<String> {
     // Get the initial token from the url's hash component.
     var hash = $wnd.location.hash;
     if (hash.length > 0) {
-      token = this.@com.google.gwt.user.client.impl.HistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
+      token = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
     }
 
-    @com.google.gwt.user.client.impl.HistoryImpl::setToken(Ljava/lang/String;)(token);
+    @com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::setToken(Ljava/lang/String;)(token);
 
     var historyImpl = this;
 
-    historyImpl.@com.google.gwt.user.client.impl.HistoryImpl::oldHandler = $wnd.onhashchange;
+    historyImpl.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::oldHandler = $wnd.onhashchange;
 
     $wnd.onhashchange = $entry(function() {
       var token = '', hash = $wnd.location.hash;
       if (hash.length > 0) {
-        token = historyImpl.@com.google.gwt.user.client.impl.HistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
+        token = historyImpl.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
       }
 
-      historyImpl.@com.google.gwt.user.client.impl.HistoryImpl::newItemOnEvent(Ljava/lang/String;)(token);
-      var oldHandler = historyImpl.@com.google.gwt.user.client.impl.HistoryImpl::oldHandler;
+      historyImpl.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::newItemOnEvent(Ljava/lang/String;)(token);
+      var oldHandler = historyImpl.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::oldHandler;
       if (oldHandler) {
         oldHandler();
       }
@@ -159,7 +159,7 @@ public class HistoryImpl implements HasValueChangeHandlers<String> {
    * encoded history token.
    */
   protected native void nativeUpdate(String historyToken) /*-{
-    $wnd.location.hash = this.@com.google.gwt.user.client.impl.HistoryImpl::encodeFragment(Ljava/lang/String;)(historyToken);
+    $wnd.location.hash = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::encodeFragment(Ljava/lang/String;)(historyToken);
   }-*/;
 
   @SuppressWarnings("unused")

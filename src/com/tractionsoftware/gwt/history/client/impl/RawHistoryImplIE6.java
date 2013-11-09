@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Google Inc.
+ * Based on code from GWT HistoryImpl, Copyright 2008 Google Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.gwt.user.client.impl;
+package com.tractionsoftware.gwt.history.client.impl;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -23,7 +23,7 @@ import com.google.gwt.user.client.Window.Location;
  * History implementation for IE6 and IE7, which do not support the onhashchange
  * event, and for which {@link HistoryImplTimer} will not work either.
  */
-class HistoryImplIE6 extends HistoryImpl {
+class RawHistoryImplIE6 extends RawHistoryImpl {
 
   /**
    * Sanitizes an untrusted string to be used in an HTML context. NOTE: This
@@ -125,16 +125,16 @@ class HistoryImplIE6 extends HistoryImpl {
     // Assume an empty token.
     var token = '';
     // Get the initial token from the url's hash component.
-    var hash = @com.google.gwt.user.client.impl.HistoryImplIE6::getLocationHash()();
+    var hash = @com.tractionsoftware.gwt.history.client.impl.RawHistoryImplIE6::getLocationHash()();
     if (hash.length > 0) {
       try {
-        token = this.@com.google.gwt.user.client.impl.HistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
+        token = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
       } catch (e) {
         // Clear the bad hash (this can't have been a valid token).
         $wnd.location.hash = '';
       }
     }
-    @com.google.gwt.user.client.impl.HistoryImpl::setToken(Ljava/lang/String;)(token);
+    @com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::setToken(Ljava/lang/String;)(token);
   }-*/;
 
   private native void initUrlCheckTimer() /*-{
@@ -150,24 +150,24 @@ class HistoryImplIE6 extends HistoryImpl {
 
       // Reset the hash if the user cancels a window reload triggered by the 
       // urlChecker.
-      if (historyImplRef.@com.google.gwt.user.client.impl.HistoryImplIE6::handleWindowReloadCanceled()()) {
+      if (historyImplRef.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImplIE6::handleWindowReloadCanceled()()) {
         return;
       }
 
-      var hash = @com.google.gwt.user.client.impl.HistoryImplIE6::getLocationHash()();
+      var hash = @com.tractionsoftware.gwt.history.client.impl.RawHistoryImplIE6::getLocationHash()();
       if (hash.length > 0) {
         var token = '';
         try {
-          token = historyImplRef.@com.google.gwt.user.client.impl.HistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
+          token = historyImplRef.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
         } catch (e) {
           // If there's a bad hash, always reload. This could only happen if
           // if someone entered or linked to a bad url.
-          historyImplRef.@com.google.gwt.user.client.impl.HistoryImplIE6::reloadWindow()();
+          historyImplRef.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImplIE6::reloadWindow()();
         }
 
-        var historyToken = @com.google.gwt.user.client.impl.HistoryImpl::getToken()();
+        var historyToken = @com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::getToken()();
         if (historyToken && (token != historyToken)) {
-          historyImplRef.@com.google.gwt.user.client.impl.HistoryImplIE6::reloadWindow()();
+          historyImplRef.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImplIE6::reloadWindow()();
         }
       }
     });
@@ -179,7 +179,7 @@ class HistoryImplIE6 extends HistoryImpl {
     var oldOnLoad = $wnd.__gwt_onHistoryLoad;
 
     $wnd.__gwt_onHistoryLoad = $entry(function(token) {
-      historyImplRef.@com.google.gwt.user.client.impl.HistoryImpl::newItemOnEvent(Ljava/lang/String;)(token);
+      historyImplRef.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::newItemOnEvent(Ljava/lang/String;)(token);
 
       if (oldOnLoad) {
         oldOnLoad(token);
@@ -188,8 +188,8 @@ class HistoryImplIE6 extends HistoryImpl {
   }-*/;
 
   private native void navigateFrame(String token) /*-{
-    var escaped = @com.google.gwt.user.client.impl.HistoryImplIE6::escapeHtml(Ljava/lang/String;)(token);
-    var doc = this.@com.google.gwt.user.client.impl.HistoryImplIE6::historyFrame.contentWindow.document;
+    var escaped = @com.tractionsoftware.gwt.history.client.impl.RawHistoryImplIE6::escapeHtml(Ljava/lang/String;)(token);
+    var doc = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImplIE6::historyFrame.contentWindow.document;
     doc.open();
     doc.write('<html><body onload="if(parent.__gwt_onHistoryLoad)parent.__gwt_onHistoryLoad(__gwt_historyToken.innerText)"><div id="__gwt_historyToken">' + escaped + '</div></body></html>');
     doc.close();
@@ -201,6 +201,6 @@ class HistoryImplIE6 extends HistoryImpl {
   }
 
   private native void updateHash(String token) /*-{
-    $wnd.location.hash = this.@com.google.gwt.user.client.impl.HistoryImpl::encodeFragment(Ljava/lang/String;)(token);
+    $wnd.location.hash = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::encodeFragment(Ljava/lang/String;)(token);
   }-*/;
 }
