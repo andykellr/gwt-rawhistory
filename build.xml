@@ -77,7 +77,7 @@
   </target>
 
   <target name="dist"
-          depends="build, build.demos, createJavadoc"
+          depends="build, build.demos"
           description="Assembles the full gwt-rawhistory distribution.">
     <mkdir dir="${project.out}" />
     <mkdir dir="${project.demos}" />
@@ -109,7 +109,7 @@
       <fileset dir="${demo.out.dir}">
       </fileset>
     </copy>
-    <copy todir="${project.root}/javadoc">
+    <copy todir="${project.root}/javadoc" failonerror="false">
       <fileset dir="${project.javadoc}">
       </fileset>
     </copy>
@@ -234,7 +234,7 @@
 
   <target name="build.demos.body">
     <delete dir="${demo.out.dir}" />
-    <copy file="demoindex.template" tofile="${demo.out.dir}/index.html" />
+    <copy file="html/demoindex.template" tofile="${demo.out.dir}/index.html" />
     <foreach target="build.demo.helper" param="gwtc.module.file">
       <param name="gwtc.src.dir" value="${demo.src.dir}" />
       <param name="gwtc.out.dir" value="${demo.out.dir}" />
