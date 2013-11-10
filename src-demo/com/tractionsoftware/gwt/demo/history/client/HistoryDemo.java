@@ -18,6 +18,7 @@ package com.tractionsoftware.gwt.demo.history.client;
 import java.util.Date;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
@@ -37,8 +38,6 @@ public class HistoryDemo implements EntryPoint {
     private ListBox events = new ListBox();
     
     private String token = "fun/(&)(&amp;)(%26)(%2526)/(#)(%23)/( )(+)(%2B)(%20)(%252B)(%2520)/%e6%bc%a2";
-    private String hash = "#"+token;
-    private String uri = "HistoryDemo.html"+hash;
     
     private static final String CLASS_MATCH = "match";
     private static final String CLASS_NO_MATCH = "no-match";
@@ -59,6 +58,9 @@ public class HistoryDemo implements EntryPoint {
             
         });
         showLocationData("");
+
+        String hash = "#"+token;
+        String uri = Document.get().getBody().getAttribute("data-file")+hash;        
         
         links.setText(0, 0, "GWT Hyperlink");
         links.setWidget(0, 1, new Hyperlink(SafeHtmlUtils.fromString(token), token));
