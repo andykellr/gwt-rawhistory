@@ -1,0 +1,5 @@
+<module>
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name='com.tractionsoftware.gwt.demostyle.DemoStyle'/>
+  <entry-point class='com.tractionsoftware.gwt.demo.history.client.HistoryDemo'/>        
+</module>
