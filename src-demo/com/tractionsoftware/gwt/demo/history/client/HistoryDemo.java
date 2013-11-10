@@ -37,7 +37,7 @@ public class HistoryDemo implements EntryPoint {
     private FlexTable links = new FlexTable();
     private ListBox events = new ListBox();
     
-    private String token = "fun/(&)(&amp;)(%26)(%2526)/(#)(%23)/( )(+)(%2B)(%20)(%252B)(%2520)/%e6%bc%a2";
+    private String token = "fun/(&)(&amp;)(%26)(%2526)/(%23)/(+)(%2B)(%20)(%252B)(%2520)/%e6%bc%a2";
     
     private static final String CLASS_MATCH = "match";
     private static final String CLASS_NO_MATCH = "no-match";
