@@ -247,7 +247,7 @@
     </foreach>
   </target>
 
-  <target name="dev.color" description="Run ColorDemo">
+  <target name="dev.rawhistory" description="Run RawHistory">
     <java failonerror="true" fork="true" classname="com.google.gwt.dev.DevMode">
         <classpath>
             <pathelement location="${project.class.path}" />
@@ -261,40 +261,14 @@
         <jvmarg value="-Xmx512M" />
         <jvmarg value="-Xdebug" />
         <arg value="-startupUrl" />
-        <arg value="http://localhost:8888/com.tractionsoftware.gwt.demo.color.ColorDemo/ColorDemo.html" />
+        <arg value="http://localhost:8888/com.tractionsoftware.gwt.demo.history.RawHistoryDemo/RawHistoryDemo.html" />
         <arg value="-war" />
         <arg value="." />
         <arg value="-logLevel" />
         <arg value="DEBUG" />
         <arg value="-bindAddress" />
         <arg value="192.168.46.1" />
-        <arg value="com.tractionsoftware.gwt.demo.color.ColorDemo" />
-    </java>
-  </target>
-
-  <target name="dev.autosize" description="Run AutoSizingTextAreaDemo">
-    <java failonerror="true" fork="true" classname="com.google.gwt.dev.DevMode">
-        <classpath>
-            <pathelement location="${project.class.path}" />
-            <pathelement location="${project.src}" />
-            <pathelement location="${demo.src.dir}" />
-            <pathelement location="${gwtquery.jar}" />
-            <pathelement location="${gwt.user.jar}" />
-            <pathelement location="${gwt.validation.api.jar}" />
-            <pathelement location="${gwt.validation.api.sources.jar}" />
-            <pathelement location="${gwt.dev.jar}" />
-        </classpath>
-        <jvmarg value="-Xmx512M" />
-        <jvmarg value="-Xdebug" />
-        <arg value="-startupUrl" />
-        <arg value="http://localhost:8888/com.tractionsoftware.gwt.demo.autosizingtextarea.AutoSizingTextAreaDemo/AutoSizingTextAreaDemo.html" />
-        <arg value="-war" />
-        <arg value="." />
-        <arg value="-logLevel" />
-        <arg value="DEBUG" />
-        <arg value="-bindAddress" />
-        <arg value="192.168.46.1" />
-        <arg value="com.tractionsoftware.gwt.demo.autosizingtextarea.AutoSizingTextAreaDemo" />
+        <arg value="com.tractionsoftware.gwt.demo.history.RawHistoryDemo" />
     </java>
   </target>
 
