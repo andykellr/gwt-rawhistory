@@ -13,14 +13,17 @@ td:first-child { background-color: #eee; }
 .info { color: #999; font-size: 12px; padding: 0.25em 0 0.5em; }
 .match { background-color: #efe; }
 .no-match { background-color: #fee; }
+.selected { background-color: #ccc; display: inline-block; padding: 5px 10px; }
+#reset { display: inline-block; padding: 5px 10px; border: 1px solid #aaa; background-color: #ddd; }
+#reset:hover { border: 1px solid #ccc; background-color: #fff; }
 </style>
 <script src="com.tractionsoftware.gwt.demo.history.RawHistoryDemo.nocache.js"></script>
 </head>
 <body data-file="RawHistoryDemo.html">
-<div class="desc">Click each of the 4 styles of link and observe the resulting Location values. Reset the location each time.
-</div>
-<h2>RawHistory Demo</h2>
-<h3>Location <span class="reset"><a href="#">(reset)</a></span></h3>
+<div class="desc">Click each of the 4 styles of link and observe the resulting Location values. Reset the location each time.<br><br><a id="reset" href="#">Reset</a></div>
+<h2><a class="demo compare" href="../com.tractionsoftware.gwt.demo.history.HistoryDemo/HistoryDemo.html">History</a> vs <span class="demo selected">RawHistory</span></h2>
+<div class="info">An alternate GWT History implementation called RawHistory.</div>
+<h3>Location</h3>
 <div class="info">Results of various API calls</div>
 <div id="location">
 </div>
