@@ -69,3 +69,7 @@ In RawHistoryImpl:
 We use getLocationHash() in places where $wnd.location.hash was used to address browsers that attempt to decode it.
 
 We also removed the gecko1_8 implementation from the .gwt.xml because the timer isn't necessary for recent Firefox and it was causing issues with IE11.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/andykellr/gwt-rawhistory/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
