@@ -25,13 +25,6 @@
     <when-type-is class="com.google.gwt.user.client.impl.HistoryImpl"/>
   </replace-with>
 
-  <!-- Mozilla has a slightly different history implementation than the     -->
-  <!-- standard case.                                                       -->
-  <replace-with class="com.tractionsoftware.gwt.history.client.impl.RawHistoryImplMozilla">
-    <when-type-is class="com.google.gwt.user.client.impl.HistoryImpl"/>
-    <when-property-is name="user.agent" value="gecko1_8"/>
-  </replace-with>
-
 	<!-- Opera has yet another slightly different implementation. -->
 	<replace-with class="com.tractionsoftware.gwt.history.client.impl.RawHistoryImplTimer">
 		<when-type-is class="com.google.gwt.user.client.impl.HistoryImpl"/>
