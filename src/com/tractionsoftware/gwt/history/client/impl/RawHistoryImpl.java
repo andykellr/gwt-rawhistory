@@ -16,12 +16,6 @@
 package com.tractionsoftware.gwt.history.client.impl;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * Native implementation associated with
@@ -33,76 +27,47 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * determine when the URL hash identifier changes.
  * </p>
  */
-public class RawHistoryImpl implements HasValueChangeHandlers<String> {
-
-  private static String token = "";
-
-  public static String getToken() {
-    return (token == null) ? "" : token;
-  }
-
-  /**
-   * Sets whether the IE6 history implementation will update the URL hash when
-   * creating a new item. This should be used only for applications with large
-   * DOM structures that are suffering from performance problems when creating a
-   * new history item on IE6 and 7.
-   * 
-   * @deprecated This is no longer necessary, as the underlying performance
-   *             problem has been solved. It is now a no-op.
-   */
-  @Deprecated
-  @SuppressWarnings("unused")
-  public static void setUpdateHashOnIE6(boolean updateHash) {
-  }
-
-  protected static void setToken(String token) {
-    RawHistoryImpl.token = token;
-  }
+public class RawHistoryImpl extends com.google.gwt.user.client.impl.HistoryImpl {
 
   private JavaScriptObject oldHandler;
-
-  private HandlerManager handlers = new HandlerManager(null);
-
-  /**
-   * Adds a {@link ValueChangeEvent} handler to be informed of changes to the
-   * browser's history stack.
-   * 
-   * @param handler the handler
-   */
-  public HandlerRegistration addValueChangeHandler(
-      ValueChangeHandler<String> handler) {
-    return handlers.addHandler(ValueChangeEvent.getType(), handler);
-  }
 
   public native void dispose() /*-{
     $wnd.onhashchange = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::oldHandler;
   }-*/;
 
-  public native String encodeFragment(String fragment) /*-{
-    // encodeURI() does *not* encode the '#' character.
-    return encodeURI(fragment).replace("#", "%23");
-  }-*/;
-
-  public void fireEvent(GwtEvent<?> event) {
-    handlers.fireEvent(event);
+  /**
+   * No decoding for RawHistory.
+   */
+  @Override
+  protected String decodeFragment(String encodedFragment) {
+    return encodedFragment;
   }
 
   /**
-   * Fires the {@link ValueChangeEvent} to all handlers with the given tokens.
+   * No encoding for RawHistory.
    */
-  public void fireHistoryChangedImpl(String newToken) {
-    ValueChangeEvent.fire(this, newToken);
+  @Override
+  public String encodeFragment(String fragment) {
+    return fragment;
   }
+    
+  /**
+   * Some browsers either don't provide or prematurely decode
+   * window.location.hash, so we don't use it.
+   */
+  private static native String getLocationHash() 
+  /*-{
+    var href = $wnd.location.href;
+    var hashIndex = href.lastIndexOf("#");
+    return (hashIndex > 0) ? href.substring(hashIndex) : "";
+  }-*/;
 
-  public HandlerManager getHandlers() {
-    return handlers;
-  }
-
+  @Override
   public native boolean init() /*-{
     var token = '';
 
     // Get the initial token from the url's hash component.
-    var hash = $wnd.location.hash;
+    var hash = @com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::getLocationHash()();
     if (hash.length > 0) {
       token = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
     }
@@ -114,7 +79,7 @@ public class RawHistoryImpl implements HasValueChangeHandlers<String> {
     historyImpl.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::oldHandler = $wnd.onhashchange;
 
     $wnd.onhashchange = $entry(function() {
-      var token = '', hash = $wnd.location.hash;
+      var token = '', hash = @com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::getLocationHash()();
       if (hash.length > 0) {
         token = historyImpl.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
       }
@@ -129,40 +94,16 @@ public class RawHistoryImpl implements HasValueChangeHandlers<String> {
     return true;
   }-*/;
 
-  public final void newItem(String historyToken, boolean issueEvent) {
-    historyToken = (historyToken == null) ? "" : historyToken;
-    if (!historyToken.equals(getToken())) {
-      setToken(historyToken);
-      nativeUpdate(historyToken);
-      if (issueEvent) {
-        fireHistoryChangedImpl(historyToken);
-      }
-    }
-  }
-
-  public final void newItemOnEvent(String historyToken) {
-    historyToken = (historyToken == null) ? "" : historyToken;
-    if (!historyToken.equals(getToken())) {
-      setToken(historyToken);
-      nativeUpdateOnEvent(historyToken);
-      fireHistoryChangedImpl(historyToken);
-    }
-  }
-
-  protected native String decodeFragment(String encodedFragment) /*-{
-    // decodeURI() does *not* decode the '#' character.
-    return decodeURI(encodedFragment.replace("%23", "#"));
-  }-*/;
-
   /**
    * The standard updateHash implementation assigns to location.hash() with an
    * encoded history token.
    */
+  @Override
   protected native void nativeUpdate(String historyToken) /*-{
-    $wnd.location.hash = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::encodeFragment(Ljava/lang/String;)(historyToken);
+    $wnd.location.hash = this.@com.google.gwt.user.client.impl.HistoryImpl::encodeFragment(Ljava/lang/String;)(historyToken);
   }-*/;
 
-  @SuppressWarnings("unused")
+  @Override
   protected void nativeUpdateOnEvent(String historyToken) {
     // Do nothing, the hash is already updated.
   }
