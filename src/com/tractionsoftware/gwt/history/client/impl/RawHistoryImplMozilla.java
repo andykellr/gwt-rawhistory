@@ -38,16 +38,12 @@ class RawHistoryImplMozilla extends RawHistoryImplTimer {
    */
   @Override
   protected native void nativeUpdate(String historyToken) /*-{
-    if (historyToken.length == 0) {
-      var s = $wnd.location.href;
-      // Pull off any hash.
-      var i = s.indexOf('#');
-      if (i != -1)
-        s = s.substring(0, i);
+    var s = $wnd.location.href;
+    // Pull off any hash.
+    var i = s.indexOf('#');
+    if (i != -1)
+    s = s.substring(0, i);
 
-      $wnd.location = s + '#';
-    } else {
-      $wnd.location.hash = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::encodeFragment(Ljava/lang/String;)(historyToken);
-    }
+    $wnd.location = s + '#' + this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::encodeFragment(Ljava/lang/String;)(historyToken);
   }-*/;
 }
