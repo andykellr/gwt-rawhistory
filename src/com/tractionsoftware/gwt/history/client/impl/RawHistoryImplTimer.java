@@ -26,7 +26,7 @@ class RawHistoryImplTimer extends RawHistoryImpl {
     var token = '';
 
     // Get the initial token from the url's hash component.
-    var hash = $wnd.location.hash;
+    var hash = @com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::getLocationHash()();
     if (hash.length > 0) {
       token = this.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
     }
@@ -37,7 +37,7 @@ class RawHistoryImplTimer extends RawHistoryImpl {
     var historyImpl = this;
 
     var checkHistory = $entry(function() {
-      var token = '', hash = $wnd.location.hash;
+      var token = '', hash = @com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::getLocationHash()();
       if (hash.length > 0) {
         token = historyImpl.@com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl::decodeFragment(Ljava/lang/String;)(hash.substring(1));
       }
@@ -46,7 +46,7 @@ class RawHistoryImplTimer extends RawHistoryImpl {
     });
 
     var checkHistoryCycle = function() {
-      @com.google.gwt.core.client.impl.Impl::setTimeout(Lcom/google/gwt/core/client/JavaScriptObject;I)(checkHistoryCycle, 250);
+      $wnd.setTimeout(checkHistoryCycle, 250);
       checkHistory();
     }
 
