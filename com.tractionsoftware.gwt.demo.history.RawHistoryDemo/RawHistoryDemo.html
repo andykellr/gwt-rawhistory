@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<title>RawHistory Demo</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+h3 { clear: both; font-size: 18px; margin: 1em 0 0; }
+select { border: 1px solid #ccc; }
+table { border-collapse: collapse; border: 1px solid #ccc; }
+td { border: 1px solid #ddd; padding: 5px; font-family: monospace; font-size: 10px; }
+td:first-child { background-color: #eee; }
+.info { color: #999; font-size: 12px; padding: 0.25em 0 0.5em; }
+.match { background-color: #efe; }
+.no-match { background-color: #fee; }
+.selected { background-color: #ccc; display: inline-block; padding: 5px 10px; }
+#reset { display: inline-block; padding: 5px 10px; border: 1px solid #aaa; background-color: #ddd; }
+#reset:hover { border: 1px solid #ccc; background-color: #fff; }
+</style>
+<script src="com.tractionsoftware.gwt.demo.history.RawHistoryDemo.nocache.js"></script>
+</head>
+<body data-file="RawHistoryDemo.html">
+<div class="desc">Click each of the 4 styles of link and observe the resulting Location values. Reset the location each time.<br><br><a id="reset" href="#">Reset</a></div>
+<h2><a class="demo compare" href="../com.tractionsoftware.gwt.demo.history.HistoryDemo/HistoryDemo.html">History</a> vs <span class="demo selected">RawHistory</span></h2>
+<div class="info">An alternate GWT History implementation called RawHistory.</div>
+<h3>Location</h3>
+<div class="info">Results of various API calls</div>
+<div id="location">
+</div>
+<h3>Links</h3>
+<div class="info">Several different styles of linking</div>
+<div id="links">
+</div>
+<h3>Events</h3>
+<div class="info">Log of ValueChangeEvents, newest on top</div>
+<div id="events">
+</div>
+</body>
+</html>
