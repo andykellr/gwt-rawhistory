@@ -20,27 +20,27 @@
 	<inherits name="com.google.gwt.core.Core"/>
 	<inherits name="com.google.gwt.user.UserAgent"/>
 
-  <!-- Override the standard implementation -->
-  <replace-with class="com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl">
-    <when-type-is class="com.google.gwt.user.client.impl.HistoryImpl"/>
-  </replace-with>
+        <!-- Override the standard implementation -->
+        <replace-with class="com.tractionsoftware.gwt.history.client.impl.RawHistoryImpl">
+          <when-type-is class="com.google.gwt.user.client.impl.HistoryImpl"/>
+        </replace-with>
 
 	<!-- Opera has yet another slightly different implementation. -->
 	<replace-with class="com.tractionsoftware.gwt.history.client.impl.RawHistoryImplTimer">
-		<when-type-is class="com.google.gwt.user.client.impl.HistoryImpl"/>
-		<when-property-is name="user.agent" value="opera"/>
+	  <when-type-is class="com.google.gwt.user.client.impl.HistoryImpl"/>
+	  <when-property-is name="user.agent" value="opera"/>
 	</replace-with>
 
 	<!-- Safari is almost like Opera, but again slightly different. -->
 	<replace-with class="com.tractionsoftware.gwt.history.client.impl.RawHistoryImplSafari">
-		<when-type-is class="com.google.gwt.user.client.impl.HistoryImpl"/>
-		<when-property-is name="user.agent" value="safari"/>
+	  <when-type-is class="com.google.gwt.user.client.impl.HistoryImpl"/>
+	  <when-property-is name="user.agent" value="safari"/>
 	</replace-with>
 
-  <!-- IE6 has a completely different history implementation. IE8 used the -->
-  <!-- standard implementation. -->
+        <!-- IE6 has a completely different history implementation. IE8 used the -->
+        <!-- standard implementation. -->
 	<replace-with class="com.tractionsoftware.gwt.history.client.impl.RawHistoryImplIE6">
-		<when-type-is class="com.google.gwt.user.client.impl.HistoryImpl"/>
-		<when-property-is name="user.agent" value="ie6"/>
+	  <when-type-is class="com.google.gwt.user.client.impl.HistoryImpl"/>
+	  <when-property-is name="user.agent" value="ie6"/>
 	</replace-with>
 </module>
